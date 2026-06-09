@@ -518,13 +518,14 @@
             }
         });
 
-        // Form Submission Handler (Prevents default refresh and shows custom toast)
-        function handleFormSubmit(event) {
+        // Form Submission Handler (Sends actual emails via FormSubmit.co and shows toast)
+        async function handleFormSubmit(event) {
             event.preventDefault(); // Prevent page reload
             
             // Get form and toast elements
             const form = document.getElementById('contact-form');
             const toast = document.getElementById('toast-message');
+            const toastText = document.getElementById('toast-text');
             const submitBtn = form.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.innerHTML;
 
@@ -532,23 +533,51 @@
             submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Sending...';
             submitBtn.disabled = true;
 
-            // Simulate network request
-            setTimeout(() => {
-                // Show success toast
+            // Collect form values
+            const formData = {
+                name: form.name.value,
+                email: form.email.value,
+                service: form.service.value || "Not specified",
+                message: form.message.value,
+                _subject: `New Inquiry from ${form.name.value} - Usman Danfodio Tech Hub`
+            };
+
+            try {
+                // Send email using FormSubmit AJAX endpoint to your specific email address
+                const response = await fetch("https://formsubmit.co/ajax/abubakarusman20171@gmail.com", {
+                    method: "POST",
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    // Configure success message
+                    toast.className = "mb-6 p-4 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center";
+                    toastText.innerText = "Thank you! Your inquiry was sent directly. Please check your inbox (or spam) for an initial FormSubmit validation link to start receiving your messages.";
+                    toast.classList.remove('hidden');
+                    form.reset();
+                } else {
+                    throw new Error("Form submission response failed");
+                }
+            } catch (error) {
+                console.error("Email delivery failed:", error);
+                // Configure error message
+                toast.className = "mb-6 p-4 rounded-lg bg-red-50 text-red-800 border border-red-200 flex items-center";
+                toastText.innerText = "Oops! We faced issues sending your message. Please verify your internet connection or email us directly.";
                 toast.classList.remove('hidden');
-                
-                // Reset form
-                form.reset();
-                
-                // Reset button
+            } finally {
+                // Reset button state
                 submitBtn.innerHTML = originalBtnText;
                 submitBtn.disabled = false;
 
-                // Hide toast after 5 seconds
+                // Hide toast after 8 seconds
                 setTimeout(() => {
                     toast.classList.add('hidden');
-                }, 5000);
-            }, 1500);
+                }, 8000);
+            }
         }
 
         // AI Chatbot Logic
