@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usman Danfodio Tech Hub</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6', // Teal core color for tech feel
+                            600: '#0d9488',
+                            900: '#134e4a',
+                            950: '#042f2e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for a polished look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        /* Fade in animation class */
+        .fade-in {
+            animation: fadeIn 1s ease-in forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="font-sans text-slate-800 bg-slate-50 antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 bg-brand-600 text-white rounded-lg flex items-center justify-center font-bold text-xl mr-3 shadow-md">
+                        UD
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-slate-900 leading-tight">
+                        USMAN DANFODIO<br><span class="text-brand-600 text-sm">TECH HUB</span>
+                    </span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Home</a>
+                    <a href="#about" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">About Us</a>
+                    <a href="#services" class="text-slate-600 hover:text-brand-600 font-medium transition-colors">Services</a>
+                    <a href="#contact" class="bg-brand-600 hover:bg-brand-700 text-white px-5 py-2.5 rounded-full font-medium transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">Contact Us</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-brand-600 focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+                <a href="#home" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50">Home</a>
+                <a href="#about" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50">About Us</a>
+                <a href="#services" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50">Services</a>
+                <a href="#contact" class="block px-3 py-3 rounded-md text-base font-medium bg-brand-50 text-brand-700 hover:bg-brand-100 mt-4 text-center">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background decorative elements -->
+        <div class="absolute top-0 right-0 -z-10 translate-x-1/3 -translate-y-1/4 transform">
+            <div class="w-96 h-96 rounded-full bg-brand-100 blur-3xl opacity-50"></div>
+        </div>
+        <div class="absolute bottom-0 left-0 -z-10 -translate-x-1/3 translate-y-1/4 transform">
+            <div class="w-96 h-96 rounded-full bg-blue-100 blur-3xl opacity-50"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center max-w-4xl mx-auto fade-in">
+                <div class="inline-flex items-center px-4 py-2 rounded-full bg-brand-50 text-brand-700 font-semibold text-sm mb-6 border border-brand-100">
+                    <span class="flex h-2 w-2 rounded-full bg-brand-500 mr-2"></span>
+                    Empowering the Digital Future
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold text-slate-900 tracking-tight leading-tight mb-8">
+                    Innovating Solutions at <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-blue-600">Usman Danfodio Tech Hub</span>
+                </h1>
+                <p class="mt-4 text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+                    We are your premier partner for cutting-edge Software Development, Web Solutions, Networking infrastructure, and comprehensive ICT services.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#services" class="px-8 py-4 text-base font-semibold rounded-full text-white bg-brand-600 hover:bg-brand-700 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                        Explore Our Services <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="#contact" class="px-8 py-4 text-base font-semibold rounded-full text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 shadow-sm transition-all">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1 relative">
+                    <!-- Image placeholder using generic colored blocks and an icon for tech aesthetic -->
+                    <div class="aspect-square rounded-2xl bg-slate-100 relative overflow-hidden flex items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-100 to-blue-50 opacity-80"></div>
+                        <i class="fas fa-laptop-code text-9xl text-brand-500 opacity-20 absolute"></i>
+                        <div class="grid grid-cols-2 gap-4 p-8 w-full h-full relative z-10">
+                            <div class="bg-white rounded-xl shadow-sm p-6 flex flex-col items-center justify-center transform translate-y-4">
+                                <i class="fas fa-code text-3xl text-blue-500 mb-3"></i>
+                                <span class="font-bold text-slate-800">Innovation</span>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-sm p-6 flex flex-col items-center justify-center transform -translate-y-4">
+                                <i class="fas fa-network-wired text-3xl text-brand-500 mb-3"></i>
+                                <span class="font-bold text-slate-800">Connection</span>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-sm p-6 flex flex-col items-center justify-center transform translate-y-4">
+                                <i class="fas fa-lightbulb text-3xl text-amber-500 mb-3"></i>
+                                <span class="font-bold text-slate-800">Solutions</span>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-sm p-6 flex flex-col items-center justify-center transform -translate-y-4">
+                                <i class="fas fa-shield-alt text-3xl text-emerald-500 mb-3"></i>
+                                <span class="font-bold text-slate-800">Security</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-1 lg:order-2">
+                    <h2 class="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-3">About Us</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6 leading-tight">Driving Digital Transformation Forward</h3>
+                    <p class="text-slate-600 mb-6 leading-relaxed text-lg">
+                        At Usman Danfodio Tech Hub, we believe in the power of technology to solve complex problems and create new opportunities. We are a dedicated team of engineers, developers, and IT specialists committed to delivering excellence.
+                    </p>
+                    <p class="text-slate-600 mb-8 leading-relaxed">
+                        Whether you are a startup looking to build your first product, or an established enterprise needing robust networking solutions, our comprehensive suite of ICT services is tailored to meet your unique needs and propel your business into the future.
+                    </p>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-100 flex items-center justify-center mt-1">
+                                <i class="fas fa-check text-brand-600 text-xs"></i>
+                            </div>
+                            <span class="ml-3 text-slate-700 font-medium">Expert team of certified professionals</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-100 flex items-center justify-center mt-1">
+                                <i class="fas fa-check text-brand-600 text-xs"></i>
+                            </div>
+                            <span class="ml-3 text-slate-700 font-medium">Customized solutions for every client</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-brand-100 flex items-center justify-center mt-1">
+                                <i class="fas fa-check text-brand-600 text-xs"></i>
+                            </div>
+                            <span class="ml-3 text-slate-700 font-medium">Commitment to quality and ongoing support</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-3">Our Expertise</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Comprehensive Tech Solutions</h3>
+                <p class="text-slate-600 text-lg">We provide end-to-end technology services designed to optimize your operations, secure your data, and elevate your digital presence.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Service 1: Software Development -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Software Development</h4>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        Custom desktop and mobile software solutions tailored to your specific business requirements. We handle the entire lifecycle from conceptualization to deployment and maintenance.
+                    </p>
+                    <ul class="text-sm text-slate-500 space-y-2">
+                        <li><i class="fas fa-angle-right text-brand-500 mr-2"></i> Custom Applications</li>
+                        <li><i class="fas fa-angle-right text-brand-500 mr-2"></i> Mobile App Development</li>
+                        <li><i class="fas fa-angle-right text-brand-500 mr-2"></i> API Integration</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2: Web Development -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-14 h-14 bg-brand-50 text-brand-600 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-600 group-hover:text-white transition-colors">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Web Development</h4>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        Beautiful, responsive, and highly functional websites and web applications. We build digital experiences that engage your audience and drive conversions.
+                    </p>
+                    <ul class="text-sm text-slate-500 space-y-2">
+                        <li><i class="fas fa-angle-right text-brand-500 mr-2"></i> Corporate Websites</li>
+                        <li><i class="fas fa-angle-right text-brand-500 mr-2"></i> E-Commerce Platforms</li>
+                        <li><i class="fas fa-angle-right text-brand-500 mr-2"></i> Web Portals & CMS</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3: Networking -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-14 h-14 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Networking</h4>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        Robust and secure network infrastructure design and implementation. We ensure your business stays connected with high-performance, scalable network architectures.
+                    </p>
+                    <ul class="text-sm text-slate-500 space-y-2">
+                        <li><i class="fas fa-angle-right text-brand-500 mr-2"></i> LAN/WAN Setup</li>
+                        <li><i class="fas fa-angle-right text-brand-500 mr-2"></i> Network Security</li>
+                        <li><i class="fas fa-angle-right text-brand-500 mr-2"></i> Server Configuration</li>
+                    </ul>
+                </div>
+
+                <!-- Service 4: ICT Services -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-14 h-14 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">General ICT Services</h4>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        Comprehensive Information and Communication Technology support, consulting, and hardware maintenance to keep your business running smoothly without interruptions.
+                    </p>
+                    <ul class="text-sm text-slate-500 space-y-2">
+                        <li><i class="fas fa-angle-right text-brand-500 mr-2"></i> IT Consulting</li>
+                        <li><i class="fas fa-angle-right text-brand-500 mr-2"></i> Hardware Maintenance</li>
+                        <li><i class="fas fa-angle-right text-brand-500 mr-2"></i> Data Backup & Recovery</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-slate-900 rounded-3xl overflow-hidden shadow-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    
+                    <!-- Contact Info -->
+                    <div class="p-10 md:p-16 text-white bg-slate-900 relative overflow-hidden">
+                        <!-- Decorative circle -->
+                        <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-brand-500 rounded-full blur-3xl opacity-20"></div>
+                        
+                        <h3 class="text-3xl font-bold mb-4 relative z-10">Get In Touch</h3>
+                        <p class="text-slate-300 mb-10 relative z-10 text-lg">Ready to transform your ideas into reality? Contact us today to discuss your project requirements.</p>
+                        
+                        <div class="space-y-8 relative z-10">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center text-brand-400 mr-4 flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm text-slate-400 uppercase tracking-wider font-semibold mb-1">Office Location</h4>
+                                    <p class="text-white font-medium">Usman Danfodio Tech Hub<br>Innovation District, Nigeria</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center text-brand-400 mr-4 flex-shrink-0">
+                                    <i class="fas fa-phone-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm text-slate-400 uppercase tracking-wider font-semibold mb-1">Phone Number</h4>
+                                    <p class="text-white font-medium">+234 07051751792/09020524234</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center text-brand-400 mr-4 flex-shrink-0">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm text-slate-400 uppercase tracking-wider font-semibold mb-1">Email Address</h4>
+                                    <p class="text-white font-medium">abubakarusman20171@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="p-10 md:p-16 bg-white">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-6">Send us a message</h3>
+                        
+                        <!-- Custom Toast Notification (Hidden initially) -->
+                        <div id="toast-message" class="hidden mb-6 p-4 rounded-lg bg-green-50 text-green-800 border border-green-200 flex items-center">
+                            <i class="fas fa-check-circle mr-3 text-green-500"></i>
+                            <span id="toast-text">Thank you! Your message has been sent successfully.</span>
+                        </div>
+
+                        <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-5">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-shadow bg-slate-50 focus:bg-white" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-shadow bg-slate-50 focus:bg-white" placeholder="john@example.com">
+                            </div>
+                            <div>
+                                <label for="service" class="block text-sm font-medium text-slate-700 mb-1">Interested Service</label>
+                                <select id="service" name="service" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-shadow bg-slate-50 focus:bg-white text-slate-700">
+                                    <option value="" disabled selected>Select a service...</option>
+                                    <option value="software">Software Development</option>
+                                    <option value="web">Web Development</option>
+                                    <option value="networking">Networking</option>
+                                    <option value="ict">ICT Services</option>
+                                    <option value="other">Other Inquiry</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-slate-700 mb-1">Message</label>
+                                <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-shadow bg-slate-50 focus:bg-white resize-none" placeholder="How can we help you?"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md flex justify-center items-center">
+                                Send Message <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center md:items-start text-center md:text-left">
+                
+                <!-- Brand -->
+                <div class="flex flex-col items-center md:items-start">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-brand-600 text-white rounded flex items-center justify-center font-bold text-sm mr-2">
+                            UD
+                        </div>
+                        <span class="font-bold text-lg text-white tracking-tight leading-tight">
+                            USMAN DANFODIO<br><span class="text-brand-500 text-xs">TECH HUB</span>
+                        </span>
+                    </div>
+                    <p class="text-sm max-w-xs">Building the future of technology, one solution at a time.</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="flex flex-col items-center md:items-center">
+                    <h4 class="text-white font-semibold mb-4 uppercase tracking-wider text-sm">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#home" class="hover:text-brand-400 transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-brand-400 transition-colors">About Us</a></li>
+                        <li><a href="#services" class="hover:text-brand-400 transition-colors">Services</a></li>
+                    </ul>
+                </div>
+
+                <!-- Socials -->
+                <div class="flex flex-col items-center md:items-end">
+                    <h4 class="text-white font-semibold mb-4 uppercase tracking-wider text-sm">Connect With Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 mt-10 pt-8 text-center text-sm flex flex-col md:flex-row justify-between items-center">
+                <p>&copy; 2026 Usman Danfodio Tech Hub. All rights reserved.</p>
+                <p class="mt-2 md:mt-0">Designed with <i class="fas fa-heart text-red-500 mx-1"></i> for innovation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot Widget -->
+    <div id="ai-chat-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <!-- Chat Window -->
+        <div id="chat-window" class="hidden w-80 sm:w-[350px] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden mb-4 transition-all duration-300 origin-bottom-right scale-95 opacity-0">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-brand-600 to-blue-600 p-4 text-white flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-robot text-xl"></i>
+                    <span class="font-semibold tracking-wide">UD Tech Assistant</span>
+                </div>
+                <button id="close-chat-btn" class="text-white hover:text-slate-200 transition-colors focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Messages Container -->
+            <div id="chat-messages" class="h-80 overflow-y-auto p-4 space-y-4 bg-slate-50 flex flex-col">
+                <!-- Welcome Message -->
+                <div class="flex items-start">
+                    <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center flex-shrink-0 mr-2 mt-1 shadow-sm">
+                        <i class="fas fa-robot text-sm"></i>
+                    </div>
+                    <div class="bg-white border border-slate-200 text-slate-700 text-sm rounded-2xl rounded-tl-none px-4 py-2 shadow-sm leading-relaxed">
+                        Hello! I'm the UD Tech Assistant. How can I help you learn about our services today?
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Indicator (Hidden) -->
+            <div id="chat-loading" class="hidden px-4 pb-3 bg-slate-50">
+                <div class="flex items-center space-x-1 text-slate-400 text-xs font-medium ml-10 bg-white border border-slate-100 w-max px-3 py-2 rounded-full shadow-sm">
+                    <i class="fas fa-circle text-[6px] animate-pulse"></i>
+                    <i class="fas fa-circle text-[6px] animate-pulse delay-75"></i>
+                    <i class="fas fa-circle text-[6px] animate-pulse delay-150"></i>
+                    <span class="ml-2">AI is thinking...</span>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <form id="chat-form" class="p-3 bg-white border-t border-slate-100 flex items-center gap-2">
+                <input type="text" id="chat-input" required class="flex-1 bg-slate-100 border border-transparent rounded-full px-4 py-2.5 text-sm focus:outline-none focus:border-brand-300 focus:bg-white transition-all shadow-inner" placeholder="Ask me anything...">
+                <button type="submit" class="w-10 h-10 rounded-full bg-brand-600 hover:bg-brand-700 text-white flex items-center justify-center transition-colors shadow-sm flex-shrink-0 focus:outline-none">
+                    <i class="fas fa-paper-plane text-sm"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- Floating Action Button -->
+        <button id="chat-toggle-btn" class="w-14 h-14 rounded-full bg-brand-600 hover:bg-brand-700 text-white shadow-xl flex items-center justify-center text-2xl transition-all transform hover:scale-105 hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-brand-300 z-50">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+    </div>
+
+    <!-- Interactive Scripts -->
+    <script>
+        
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const icon = btn.querySelector('i');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            if(menu.classList.contains('hidden')){
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+
+        // Close mobile menu when clicking a link
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-sm');
+                navbar.classList.remove('py-2');
+            } else {
+                navbar.classList.remove('shadow-sm');
+                navbar.classList.add('py-2');
+            }
+        });
+
+        // Form Submission Handler (Prevents default refresh and shows custom toast)
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Prevent page reload
+            
+            // Get form and toast elements
+            const form = document.getElementById('contact-form');
+            const toast = document.getElementById('toast-message');
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+
+            // Loading state
+            submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+
+            // Simulate network request
+            setTimeout(() => {
+                // Show success toast
+                toast.classList.remove('hidden');
+                
+                // Reset form
+                form.reset();
+                
+                // Reset button
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+
+                // Hide toast after 5 seconds
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 5000);
+            }, 1500);
+        }
+
+        // AI Chatbot Logic
+        const chatToggleBtn = document.getElementById('chat-toggle-btn');
+        const closeChatBtn = document.getElementById('close-chat-btn');
+        const chatWindow = document.getElementById('chat-window');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatLoading = document.getElementById('chat-loading');
+
+        let isChatOpen = false;
+
+        // Gemini API Configuration
+        const apiKey = ""; // Canvas environment automatically provides the API key in runtime
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        
+        // Custom Persona for the Tech Hub
+        const systemPrompt = `You are a helpful, professional, and friendly AI assistant for Usman Danfodio Tech Hub. 
+        The hub offers the following core services:
+        1. Software Development (Custom desktop/mobile apps, API integration)
+        2. Web Development (Corporate sites, E-commerce, Web Portals & CMS)
+        3. Networking (LAN/WAN setup, Network Security, Server configuration)
+        4. General ICT Services (IT Consulting, Hardware maintenance, Data backup).
+        
+        Guidelines:
+        - Keep your responses concise (1-2 short paragraphs max).
+        - Format lists nicely if you need to provide multiple points.
+        - Be enthusiastic about technology and how it helps businesses.
+        - If someone asks for pricing or complex project scopes, explain that quotes are customized based on specific project needs and politely encourage them to use the "Contact Us" form on the website.
+        - Do not invent services not listed above.`;
+
+        let chatHistory = [];
+
+        // Toggle Chat Window Visibility
+        function toggleChat() {
+            isChatOpen = !isChatOpen;
+            if (isChatOpen) {
+                chatWindow.classList.remove('hidden');
+                // Small delay to allow display:block to apply before animating opacity/scale
+                setTimeout(() => {
+                    chatWindow.classList.remove('scale-95', 'opacity-0');
+                    chatWindow.classList.add('scale-100', 'opacity-100');
+                    chatInput.focus();
+                }, 10);
+                chatToggleBtn.innerHTML = '<i class="fas fa-times"></i>';
+                chatToggleBtn.classList.add('bg-slate-700', 'hover:bg-slate-800');
+                chatToggleBtn.classList.remove('bg-brand-600', 'hover:bg-brand-700');
+            } else {
+                chatWindow.classList.remove('scale-100', 'opacity-100');
+                chatWindow.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    chatWindow.classList.add('hidden');
+                }, 300);
+                chatToggleBtn.innerHTML = '<i class="fas fa-comment-dots"></i>';
+                chatToggleBtn.classList.remove('bg-slate-700', 'hover:bg-slate-800');
+                chatToggleBtn.classList.add('bg-brand-600', 'hover:bg-brand-700');
+            }
+        }
+
+        chatToggleBtn.addEventListener('click', toggleChat);
+        closeChatBtn.addEventListener('click', toggleChat);
+
+        // Add Message Element to UI
+        function appendMessage(text, isUser) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `flex items-start ${isUser ? 'justify-end' : ''}`;
+            
+            let innerHTML = '';
+            if (isUser) {
+                innerHTML = `
+                    <div class="bg-brand-600 text-white text-sm rounded-2xl rounded-tr-none px-4 py-2.5 shadow-sm max-w-[85%] break-words">
+                        ${text}
+                    </div>
+                `;
+            } else {
+                // Rough parsing for bold markdown text generated by Gemini
+                const formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                // Replace line breaks with br tags
+                const htmlText = formattedText.replace(/\n/g, '<br>');
+                
+                innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center flex-shrink-0 mr-2 mt-1 shadow-sm">
+                        <i class="fas fa-robot text-sm"></i>
+                    </div>
+                    <div class="bg-white border border-slate-200 text-slate-700 text-sm rounded-2xl rounded-tl-none px-4 py-2.5 shadow-sm max-w-[85%] break-words leading-relaxed">
+                        ${htmlText}
+                    </div>
+                `;
+            }
+            
+            msgDiv.innerHTML = innerHTML;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Auto-scroll to bottom
+        }
+
+        // Handle Chat Submission
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // 1. Update UI with user message
+            appendMessage(message, true);
+            chatInput.value = '';
+            
+            // 2. Add to chat history array
+            chatHistory.push({ role: "user", parts: [{ text: message }] });
+
+            // 3. Show loading state
+            chatLoading.classList.remove('hidden');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            try {
+                // 4. Construct payload for Gemini API
+                const payload = {
+                    contents: chatHistory,
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    }
+                };
+
+                // 5. Make API Call with exponential backoff for reliability
+                let response;
+                let retries = 3;
+                let delay = 1000;
+                
+                for(let i=0; i < retries; i++) {
+                    response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (response.ok) break; // Success, exit retry loop
+                    await new Promise(r => setTimeout(r, delay)); // Wait before retry
+                    delay *= 2; // Exponential backoff
+                }
+
+                if (!response.ok) throw new Error('Failed to connect to the AI model.');
+
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+                
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    const aiText = candidate.content.parts[0].text;
+                    
+                    // 6. Update history and UI with model response
+                    chatHistory.push({ role: "model", parts: [{ text: aiText }] });
+                    appendMessage(aiText, false);
+                } else {
+                    throw new Error('Unexpected response format from API.');
+                }
+
+            } catch (error) {
+                console.error("AI Chat Error:", error);
+                appendMessage("I'm sorry, I seem to be having connectivity issues right now. Please feel free to use the contact form above to reach our team!", false);
+            } finally {
+                // 7. Hide loading state
+                chatLoading.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
