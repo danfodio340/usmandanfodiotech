@@ -427,16 +427,54 @@
     <!-- AI Chatbot Widget -->
     <div id="ai-chat-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
         <!-- Chat Window -->
-        <div id="chat-window" class="hidden w-80 sm:w-[350px] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden mb-4 transition-all duration-300 origin-bottom-right scale-95 opacity-0">
+        <div id="chat-window" class="hidden w-80 sm:w-[350px] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden mb-4 transition-all duration-300 origin-bottom-right scale-95 opacity-0 relative">
             <!-- Header -->
             <div class="bg-gradient-to-r from-brand-600 to-blue-600 p-4 text-white flex justify-between items-center">
                 <div class="flex items-center space-x-2">
                     <i class="fas fa-robot text-xl"></i>
                     <span class="font-semibold tracking-wide">UD Tech Assistant</span>
                 </div>
-                <button id="close-chat-btn" class="text-white hover:text-slate-200 transition-colors focus:outline-none">
-                    <i class="fas fa-times"></i>
-                </button>
+                <div class="flex items-center space-x-3">
+                    <button id="chat-settings-btn" class="text-white/80 hover:text-white transition-colors focus:outline-none" title="Configure Assistant">
+                        <i class="fas fa-cog text-sm"></i>
+                    </button>
+                    <button id="close-chat-btn" class="text-white hover:text-slate-200 transition-colors focus:outline-none">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Settings Panel (Hidden by default) -->
+            <div id="settings-panel" class="hidden absolute inset-x-0 top-[60px] bottom-0 bg-white z-20 p-5 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <h4 class="font-bold text-slate-900 flex items-center gap-2 text-sm sm:text-base">
+                        <i class="fas fa-key text-brand-600"></i>
+                        Assistant Setup
+                    </h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        To run this AI assistant on live hosting like <strong>GitHub Pages</strong>, you need to connect your Google Gemini API key.
+                    </p>
+                    <div class="bg-brand-50 p-3 rounded-xl border border-brand-100 space-y-1">
+                        <span class="text-[11px] font-bold text-brand-900 block">How to get a FREE key:</span>
+                        <ol class="text-[10px] text-brand-800 list-decimal list-inside space-y-0.5">
+                            <li>Go to <a href="https://aistudio.google.com/" target="_blank" class="underline font-bold text-blue-600">Google AI Studio</a></li>
+                            <li>Click <strong>"Get API key"</strong></li>
+                            <li>Create a key & paste it below:</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <label for="api-key-input" class="block text-[11px] font-medium text-slate-700 mb-1">Gemini API Key</label>
+                        <input type="password" id="api-key-input" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none" placeholder="AIzaSy...">
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <button id="save-key-btn" class="flex-1 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold py-2 px-3 rounded-lg transition-colors">
+                        Save Key
+                    </button>
+                    <button id="cancel-settings-btn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold py-2 px-3 rounded-lg transition-colors">
+                        Cancel
+                    </button>
+                </div>
             </div>
             
             <!-- Messages Container -->
@@ -589,11 +627,31 @@
         const chatMessages = document.getElementById('chat-messages');
         const chatLoading = document.getElementById('chat-loading');
 
+        // New DOM elements for Settings
+        const chatSettingsBtn = document.getElementById('chat-settings-btn');
+        const settingsPanel = document.getElementById('settings-panel');
+        const apiKeyInput = document.getElementById('api-key-input');
+        const saveKeyBtn = document.getElementById('save-key-btn');
+        const cancelSettingsBtn = document.getElementById('cancel-settings-btn');
+
         let isChatOpen = false;
 
+        // Load saved API key from localStorage if it exists
+        let userApiKey = localStorage.getItem('ud_tech_hub_gemini_key') || "";
+        if (userApiKey) {
+            apiKeyInput.value = userApiKey;
+        }
+
         // Gemini API Configuration
-        const apiKey = ""; // Canvas environment automatically provides the API key in runtime
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        // In Canvas, we use the empty string so Canvas injects it.
+        // On live sites, we need the localStorage key.
+        const getApiKey = () => {
+            return userApiKey || "";
+        };
+
+        const getApiUrl = () => {
+            return `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${getApiKey()}`;
+        };
         
         // Custom Persona for the Tech Hub
         const systemPrompt = `You are a helpful, professional, and friendly AI assistant for Usman Danfodio Tech Hub. 
@@ -640,6 +698,67 @@
 
         chatToggleBtn.addEventListener('click', toggleChat);
         closeChatBtn.addEventListener('click', toggleChat);
+
+        // Toggle Settings Panel
+        chatSettingsBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            settingsPanel.classList.toggle('hidden');
+        });
+
+        cancelSettingsBtn.addEventListener('click', () => {
+            settingsPanel.classList.add('hidden');
+        });
+
+        saveKeyBtn.addEventListener('click', () => {
+            const newKey = apiKeyInput.value.trim();
+            if (newKey) {
+                userApiKey = newKey;
+                localStorage.setItem('ud_tech_hub_gemini_key', newKey);
+                settingsPanel.classList.add('hidden');
+                appendMessage("System: API Key updated. Assistant is ready!", false);
+                const banner = document.getElementById('api-setup-banner');
+                if (banner) banner.remove();
+            } else {
+                userApiKey = "";
+                localStorage.removeItem('ud_tech_hub_gemini_key');
+                settingsPanel.classList.add('hidden');
+                appendMessage("System: API Key cleared.", false);
+            }
+        });
+
+        // Show Setup notice if live on GitHub Pages and no key is saved
+        function checkApiKeySetup() {
+            const isLiveHosting = window.location.hostname !== 'localhost' && 
+                                  window.location.hostname !== '127.0.0.1' && 
+                                  !window.location.hostname.includes('canvas') && 
+                                  !window.location.hostname.includes('stackblitz');
+            
+            const existingBanner = document.getElementById('api-setup-banner');
+            if (isLiveHosting && !userApiKey && !existingBanner) {
+                const setupBanner = document.createElement('div');
+                setupBanner.id = 'api-setup-banner';
+                setupBanner.className = 'bg-amber-50 border border-amber-200 text-amber-800 text-xs p-3 rounded-xl mb-4 cursor-pointer hover:bg-amber-100 transition-all';
+                setupBanner.innerHTML = `
+                    <div class="flex items-start gap-2">
+                        <i class="fas fa-exclamation-triangle mt-0.5 text-amber-600"></i>
+                        <div>
+                            <span class="font-bold">Setup Required:</span> To run this AI on GitHub, you need an API key. <span class="underline font-semibold text-brand-700">Click here to configure it in 10 seconds!</span>
+                        </div>
+                    </div>
+                `;
+                setupBanner.addEventListener('click', () => {
+                    settingsPanel.classList.remove('hidden');
+                });
+                chatMessages.prepend(setupBanner);
+            }
+        }
+
+        // Initialize setup check when opened
+        chatToggleBtn.addEventListener('click', () => {
+            if (isChatOpen) {
+                setTimeout(checkApiKeySetup, 100);
+            }
+        });
 
         // Add Message Element to UI
         function appendMessage(text, isUser) {
@@ -706,7 +825,7 @@
                 let delay = 1000;
                 
                 for(let i=0; i < retries; i++) {
-                    response = await fetch(apiUrl, {
+                    response = await fetch(getApiUrl(), {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
